@@ -12,5 +12,9 @@
       "email": "angelombordin@gmail.com"
     }
   ],
-  "require": {}
+  "require": {
+    "doctrine/orm": "^2.16",
+    "symfony/cache": "^6.3",
+    "doctrine/annotations": "^2.0"
+  }
 }

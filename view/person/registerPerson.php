@@ -4,22 +4,24 @@
   <?= $title ?>
 </h1>
 
-<form action="" method="POST">
+<form method="POST">
+  <div class="row">
 
-  <div class="mb-3">
-    <label for="nomeCurso" class="form-label">Nome do Curso</label>
-    <input type="text" class="form-control" id="nomeCurso" name="nomeCurso" autofocus>
+    <div class="form-group col-12 col-md-4">
+      <label for="cpf">CPF</label>
+      <input type="text" class="form-control" name="cpf" id="cpf" required>
+    </div>
+
+    <div class="form-group col-12 col-md-8">
+      <label for="name">Nome</label>
+      <input type="text" class="form-control" name="name" id="name" required>
+    </div>
+
   </div>
 
-  <div class="mb-3">
-    <label for="chCurso" class="form-label">CH Curso</label>
-    <input type="number" class="form-control" id="chCurso" step="1" min="1" max="5000" name="chCurso">
+  <div class="form-group mt-3">
+    <button type="submit" class="btn btn-success">Cadastrar</button>
   </div>
-
-  <div class="mb-3">
-    <button type="submit" class="btn btn-primary" id="btnSalvar">Salvar</button>
-  </div>
-
 </form>
 
 <?php include __DIR__ . '/../fim-html.php'; ?>

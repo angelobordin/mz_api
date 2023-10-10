@@ -4,14 +4,22 @@
   <?= $title ?>
 </h1>
 
-<a href="/novo-curso" class="btn btn-primary mb-3">Novo Curso</a>
+<a href="/person/register" class="btn btn-primary mb-3">Cadastrar Pessoa</a>
 
-<ul class="list-group">
-  <li class="list-group-item">Informática Básica 100h</li>
-  <li class="list-group-item">Montagem e Manutenção de Computadores 200h</li>
-  <li class="list-group-item">Redes de Computadores 100h</li>
-  <li class="list-group-item">Design Gráfico 160h</li>
-  <li class="list-group-item">Web Design 180h</li>
-</ul>
+<section id="personList">
+  <table class="table">
+    <thead class="bg-dark text-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">ID</th>
+        <th scope="col">Nome</th>
+        <th scope="col">CPF</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?= $registers ?>
+    </tbody>
+  </table>
+</section>
 
 <?php include __DIR__ . '/../fim-html.php'; ?>
