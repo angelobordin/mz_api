@@ -1,0 +1,16 @@
+{
+  "name": "friendly/routes",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Angelo Bordin",
+      "email": "angelombordin@gmail.com"
+    }
+  ],
+  "require": {}
+}
