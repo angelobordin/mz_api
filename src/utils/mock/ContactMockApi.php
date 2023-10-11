@@ -71,4 +71,15 @@ class ContactMockApi
     {
         return $this->registers;
     }
+
+    public function insertContact($newContact)
+    {
+        array_push($this->registers, [
+            'id' => sizeof($this->registers) + 1,
+            'tipo' => $newContact['tipo'],
+            'descricao' => $newContact['descricao'],
+            'pessoa' => $newContact['pessoa']
+        ]);
+        return;
+    }
 }

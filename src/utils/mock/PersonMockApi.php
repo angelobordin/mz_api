@@ -78,7 +78,6 @@ class PersonMockApi
             'name' => $newPerson['name'],
             'cpf' => $newPerson['cpf']
         ]);
-        print_r($this->registers);
         return;
     }
 }

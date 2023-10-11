@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Person as PersonEntity;
 use App\utils\mock\PersonMockApi;
 use App\utils\View;
 

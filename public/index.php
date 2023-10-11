@@ -24,10 +24,10 @@ switch ($_SERVER['PATH_INFO']) {
     echo $controlador->personRegister();
     break;
 
-  // case '/contact/register':
-  //   $controlador = new RegisterContact();
-  //   echo $controlador->processRequest();
-  //   break;
+  case '/contact/register':
+    $controlador = new Contact();
+    echo $controlador->contactRegister();
+    break;
 
   default:
     $controlador = new Home();

@@ -8,17 +8,50 @@ use App\utils\View;
 
 class Contact extends Page
 {
-    // public function registerPerson(Request $request)
-    // {
-    //     $postVars = $request->getPostVars();
+    private function registerNewContact($data)
+    {
+        $api = new ContactMockApi;
+        $newContact = [
+            'tipo' => $data['tipo'],
+            'pessoa' => $data['pessoa'],
+            'descricao' => $data['descricao']
+        ];
+        $api->insertContact($newContact);
 
-    //     $newPerson = new PersonEntity;
-    //     $newPerson->name = $postVars['name'];
-    //     $newPerson->cpf = $postVars['cpf'];
-    //     $newPerson->registerPerson($newPerson);
+        return self::contactList();
+    }
 
-    //     return self::personList($request);
-    // }
+    private function getSelectOptions()
+    {
+        $registers = '';
+
+        $api = new PersonMockApi();
+        $personList = $api->getRegisters();
+
+        foreach ($personList as $key => $row) {
+            $registers .= View::render('components/personOption', [
+                'id' => $row['id'],
+                'name' => $row['name'],
+            ]);
+        }
+
+        return $registers;
+    }
+
+    public function contactRegister()
+    {
+        $data = $_POST;
+        if ($data) {
+            return $this->registerNewContact($data);
+        } else {
+            $contentView = View::render('contact/contactRegister', [
+                'title' => "CADASTRO DE CONTATO",
+                'personOptions' => $this->getSelectOptions()
+            ]);
+
+            return parent::getPage("CADASTRO DE CONTATO", $contentView);
+        }
+    }
 
     private function getContactRegisters()
     {
