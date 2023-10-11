@@ -21,7 +21,7 @@
   <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">MAGAZORD</a>
+        <a class="navbar-brand" href="/">MAGAZORD</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
           aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -35,13 +35,9 @@
               <a class="nav-link" href="/person/list">Pessoas</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/">Contatos</a>
+              <a class="nav-link" href="/contact/list">Contatos</a>
             </li>
           </ul>
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Buscar</button>
-          </form>
         </div>
       </div>
     </nav>

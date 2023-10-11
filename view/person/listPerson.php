@@ -1,4 +1,4 @@
-<?php include __DIR__ . '/../inicio-html.php'; ?>
+<?php include __DIR__ . '/../header.php'; ?>
 
 <h1>
   <?= $title ?>
@@ -17,9 +17,9 @@
       </tr>
     </thead>
     <tbody>
-      <?= $registers ?>
+
     </tbody>
   </table>
 </section>
 
-<?php include __DIR__ . '/../fim-html.php'; ?>
+<?php include __DIR__ . '/../footer.php'; ?>
