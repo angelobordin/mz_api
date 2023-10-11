@@ -2,42 +2,35 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use App\Controller\ListContact;
-use App\Controller\ListPerson;
-use App\Controller\RegisterContact;
-use App\Controller\RegisterPerson;
+use App\Controller\Contact;
 use App\Controller\Home;
+use App\Controller\Person;
 
-switch (@$_SERVER['PATH_INFO']) {
+define("URL", 'http://localhost:8000/');
+
+switch ($_SERVER['PATH_INFO']) {
   case '/person/list':
-    $controlador = new ListPerson();
-    $controlador->processRequest();
+    $controlador = new Person();
+    echo $controlador->personList();
     break;
 
   case '/contact/list':
-    $controlador = new ListContact();
-    $controlador->processRequest();
+    $controlador = new Contact();
+    echo $controlador->contactList();
     break;
 
   case '/person/register':
-    $controlador = new RegisterPerson();
-    $controlador->processRequest();
+    $controlador = new Person();
+    echo $controlador->personRegister();
     break;
 
-  case '/contact/register':
-    $controlador = new RegisterContact();
-    $controlador->processRequest();
-    break;
-
-  case '';
-  case '/';
-  case '/home';
-  case '/index';
-    $controlador = new Home();
-    $controlador->processRequest();
-    break;
+  // case '/contact/register':
+  //   $controlador = new RegisterContact();
+  //   echo $controlador->processRequest();
+  //   break;
 
   default:
-    echo "Erro 404 - Página não encontrada";
+    $controlador = new Home();
+    echo $controlador->getHome();
     break;
 }

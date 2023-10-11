@@ -1,0 +1,21 @@
+<h1>{{title}}</h1>
+<a href="/person/register">
+    <button class="btn btn-primary">Nova Pessoa</button>
+</a>
+<hr>
+<section id="personList">
+    <table class="table">
+        <thead class="bg-dark text-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">CPF</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{registers}}
+        </tbody>
+    </table>
+</section>
+<hr>

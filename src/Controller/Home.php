@@ -2,11 +2,17 @@
 
 namespace App\Controller;
 
-class Home implements IRequestController
+use App\Controller\Page;
+use App\utils\View;
+
+class Home extends Page
 {
-    public function processRequest(): void
+    public function getHome(): string
     {
-        $title = "MAGAZORD APP";
-        include_once __DIR__ . '/../../view/home.php';
+        $content = View::render('home', [
+            'name' => "Magazord",
+        ]);
+
+        return self::getPage('Home', $content);
     }
 }
