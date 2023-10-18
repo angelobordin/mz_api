@@ -5,52 +5,52 @@ namespace App\utils\mock;
 class PersonMockApi
 {
     private $registers = [
-        'e1' => [
+        [
             'id' => 1,
             'name' => 'Angelo',
             'cpf' => '03998303912'
         ],
-        'e2' => [
+        [
             'id' => 2,
             'name' => 'Maria',
             'cpf' => '1234567890'
         ],
-        'e3' => [
+        [
             'id' => 3,
             'name' => 'João',
             'cpf' => '9876543210'
         ],
-        'e4' => [
+        [
             'id' => 4,
             'name' => 'Carla',
             'cpf' => '5678901234'
         ],
-        'e5' => [
+        [
             'id' => 5,
             'name' => 'Pedro',
             'cpf' => '3210987654'
         ],
-        'e6' => [
+        [
             'id' => 6,
             'name' => 'Lúcia',
             'cpf' => '4567890123'
         ],
-        'e7' => [
+        [
             'id' => 7,
             'name' => 'Ana',
             'cpf' => '8901234567'
         ],
-        'e8' => [
+        [
             'id' => 8,
             'name' => 'Antônio',
             'cpf' => '2345678901'
         ],
-        'e9' => [
+        [
             'id' => 9,
             'name' => 'Sofia',
             'cpf' => '6543210987'
         ],
-        'e10' => [
+        [
             'id' => 10,
             'name' => 'José',
             'cpf' => '0123456789'
@@ -64,11 +64,13 @@ class PersonMockApi
 
     public function getPersonById($person_id)
     {
-        if (array_key_exists("e$person_id", $this->registers)) {
-            return $this->registers["e$person_id"]['name'];
-        } else {
-            return "Pessoa não cadastrada"; // Retorna null se o ID não for encontrado
+        foreach ($this->registers as $person) {
+            if ($person['id'] == $person_id) {
+                return $person;
+            }
         }
+
+        return "Pessoa não cadastrada"; // Retorna null se o ID não for encontrado
     }
 
     public function insertPerson($newPerson)
@@ -78,6 +80,32 @@ class PersonMockApi
             'name' => $newPerson['name'],
             'cpf' => $newPerson['cpf']
         ]);
+        return;
+    }
+
+    public function removePerson(string $id)
+    {
+        // LOCALIZAÇÃO POSIÇAO DO OBJ PELA COLUNA 'ID'
+        $index = array_search($id, array_column($this->registers, 'id'));
+
+        // REMOVE DO ARRAY O OBJ LOCALIZADO NO INDICE
+        if ($index !== false || $index !== null) {
+            unset($this->registers[$index]);
+        }
+
+        return;
+    }
+
+    public function updatePerson(string $id, $newData)
+    {
+        // LOCALIZAÇÃO POSIÇAO DO OBJ PELA COLUNA 'ID'
+        $index = array_search($id, array_column($this->registers, 'id'));
+
+        // ATUALIZA O OBJ LOCALIZADO NO INDICE
+        if ($index !== false && $index !== null) {
+            $this->registers[$index] = $newData;
+        }
+
         return;
     }
 }
