@@ -8,29 +8,65 @@ use App\Controller\Person;
 
 define("URL", 'http://localhost:8000/');
 
-switch ($_SERVER['PATH_INFO']) {
+$pathInfo = $_SERVER['PATH_INFO'];
+
+$editContactPattern = '/^\/edit\/contact\/(\d+)$/';
+$deleteContactPattern = '/^\/delete\/contact\/(\d+)$/';
+$editPersonPattern = '/^\/edit\/person\/(\d+)$/';
+$deletePersonPattern = '/^\/delete\/person\/(\d+)$/';
+
+switch ($pathInfo) {
   case '/person/list':
-    $controlador = new Person();
-    echo $controlador->personList();
+    $controller = new Person();
+    echo $controller->personList();
     break;
 
   case '/contact/list':
-    $controlador = new Contact();
-    echo $controlador->contactList();
+    $controller = new Contact();
+    echo $controller->contactList();
     break;
 
   case '/person/register':
-    $controlador = new Person();
-    echo $controlador->personRegister();
+    $controller = new Person();
+    echo $controller->personRegister();
     break;
 
   case '/contact/register':
-    $controlador = new Contact();
-    echo $controlador->contactRegister();
+    $controller = new Contact();
+    echo $controller->contactRegister();
     break;
 
   default:
-    $controlador = new Home();
-    echo $controlador->getHome();
+    // /edit/contact/:id
+    if (preg_match($editContactPattern, $pathInfo, $matches)) {
+      $id = $matches[1];
+      $controller = new Contact();
+      echo $controller->editContactById($id);
+
+    }
+    // /edit/person/:id
+    else if (preg_match($editPersonPattern, $pathInfo, $matches)) {
+      $id = $matches[1];
+      $controller = new Person();
+      echo $controller->editPersonById($id);
+
+    }
+    // /delete/contact/:id
+    else if (preg_match($deleteContactPattern, $pathInfo, $matches)) {
+      $id = $matches[1];
+      $controller = new Contact();
+      echo $controller->deleteContactById($id);
+
+    }
+    // /delete/person/:id
+    else if (preg_match($deletePersonPattern, $pathInfo, $matches)) {
+      $id = $matches[1];
+      $controller = new Person();
+      echo $controller->deletePersonById($id);
+
+    } else {
+      $controller = new Home();
+      echo $controller->getHome();
+    }
     break;
 }
