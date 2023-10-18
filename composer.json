@@ -15,6 +15,7 @@
   "require": {
     "doctrine/orm": "^2.16",
     "symfony/cache": "^6.3",
-    "doctrine/annotations": "^2.0"
+    "doctrine/annotations": "^2.0",
+    "twbs/bootstrap-icons": "^1.11"
   }
 }
