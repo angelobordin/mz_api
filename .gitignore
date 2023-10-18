@@ -1,0 +1,58 @@
+# Ignorar diretórios gerados pelo Composer
+/vendor/
+
+# Ignorar arquivos de configuração do Composer
+/composer.lock
+/composer.phar
+
+# Ignorar arquivos e diretórios gerados pelo Doctrine
+/app/config/parameters.yml
+/app/cache/
+/app/logs/
+
+# Ignorar o diretório de saída da compilação do Bootstrap
+/public/assets/
+
+# Ignorar arquivos de configuração sensíveis (geralmente contêm senhas e informações confidenciais)
+/app/config/parameters.yml
+/app/config/secrets/*
+
+# Ignorar logs e arquivos de depuração
+/var/logs/
+/app/logs/
+/app/config/debug.cache
+
+# Ignorar diretórios de cache gerados pelo Symfony
+/var/cache/
+/var/sessions/
+/var/logs/
+
+# Ignorar arquivos de configuração local
+/app/config/config_local.yml
+
+# Ignorar arquivos de ambiente
+.env
+.env.local
+.env.*.local
+
+# Ignorar arquivos de logs e caches gerais
+/log/
+/var/
+
+# Ignorar arquivos de dependências baixadas por npm ou Yarn
+/node_modules/
+/public/build/
+/public/manifest.json
+/public/assets/*
+
+# Ignorar arquivos de IDE
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Ignorar arquivos temporários e de backup
+*.swp
+*~
+.DS_Store
+Thumbs.db
