@@ -17,7 +17,10 @@ class EntityManagerFactory
         );
         $connection = [
             'driver' => 'pdo_mysql',
-            'path' => $rootDir . '/db/banco.mysql'
+            'host' => 'localhost',
+            'dbname' => 'magazord',
+            'user' => 'root',
+            'password' => 'root',
         ];
 
         return EntityManager::create($connection, $config);
