@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\utils\mock\PersonMockApi;
+use App\Model\PersonModel;
 use App\utils\View;
 
 class Person extends Page
@@ -10,12 +10,8 @@ class Person extends Page
 
     private function registerNewPerson($data)
     {
-        $api = new PersonMockApi;
-        $newPerson = [
-            'name' => $data['name'],
-            'cpf' => $data['cpf']
-        ];
-        $api->insertPerson($newPerson);
+        $repository = new PersonModel();
+        $repository->insertPerson($data['name'], $data['cpf']);
 
         return self::personList();
     }
@@ -28,8 +24,6 @@ class Person extends Page
         } else {
             $contentView = View::render('person/personRegister', [
                 'title' => "CADASTRO DE PESSOA",
-                'cpf' => '',
-                'name' => ''
             ]);
 
             return parent::getPage("CADASTRO DE PESSOA", $contentView);
@@ -40,14 +34,14 @@ class Person extends Page
     {
         $registers = '';
 
-        $api = new PersonMockApi();
-        $results = $api->getRegisters();
+        $repository = new PersonModel();
+        $results = $repository->getRegisters();
 
-        foreach ($results as $key => $row) {
+        foreach ($results as $key => $person) {
             $registers .= View::render('person/person', [
-                'id' => $row['id'],
-                'name' => $row['name'],
-                'cpf' => $row['cpf'],
+                'id' => $person->getId(),
+                'name' => $person->getName(),
+                'cpf' => $person->getCpf(),
             ]);
         }
 
@@ -69,26 +63,26 @@ class Person extends Page
         if ($newData) {
             return self::updatePersonById($id, $newData);
         } else {
-            $api = new PersonMockApi();
-            $personData = $api->getPersonById($id);
+            $repository = new PersonModel();
+            $personData = $repository->getPersonById($id);
+
+            if ($personData == null)
+                return self::personList();
 
             $contentView = View::render('person/personEdit', [
                 'title' => "EDITANDO REGISTRO",
-                'cpf' => $personData['cpf'],
-                'name' => $personData['name']
+                'cpf' => $personData->getCpf(),
+                'name' => $personData->getName()
             ]);
+
             return parent::getPage("LISTA DE PESSOAS", $contentView);
         }
     }
 
     public function updatePersonById($id, $newData)
     {
-        $api = new PersonMockApi();
-        $newData = [
-            'name' => $newData['name'],
-            'cpf' => $newData['cpf'],
-        ];
-        $api->updatePerson($id, $newData);
+        $repository = new PersonModel();
+        $repository->updatePerson($id, $newData['cpf'], $newData['name']);
 
         // RETORNA LISTA DE CONTATOS BUSCADOS DA MOCK API
         return self::personList();
@@ -96,8 +90,8 @@ class Person extends Page
 
     public function deletePersonById(string $id)
     {
-        $api = new PersonMockApi;
-        $api->removePerson($id);
+        $repository = new PersonModel();
+        $repository->removePerson($id);
 
         // RETORNA LISTA DE CONTATOS BUSCADOS DA MOCK API
         return self::personList();
