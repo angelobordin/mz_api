@@ -2,22 +2,19 @@
 
 namespace App\Controller;
 
-use App\utils\mock\ContactMockApi;
-use App\utils\mock\PersonMockApi;
+use App\Model\ContactModel;
+use App\Model\PersonModel;
 use App\utils\View;
 
 class Contact extends Page
 {
+
+
     private function registerNewContact($data)
     {
         // ADICIONA UM REGISTRO NA MOCK API
-        $api = new ContactMockApi;
-        $newContact = [
-            'tipo' => $data['tipo'],
-            'pessoa' => $data['pessoa'],
-            'descricao' => $data['descricao']
-        ];
-        $api->insertContact($newContact);
+        $repository = new ContactModel();
+        $repository->insertContact($data['tipo'], $data['descricao'], $data['pessoa']);
 
         // RETORNA LISTA DE CONTATOS BUSCADOS DA MOCK API
         return self::contactList();
@@ -28,16 +25,16 @@ class Contact extends Page
         $registers = '';
 
         // BUSCA PESSOAS CADASTRADAS NA MOCK API
-        $api = new PersonMockApi();
-        $personList = $api->getRegisters();
+        $personRepository = new PersonModel();
+        $personList = $personRepository->getRegisters();
 
         // PARA CADA PESSOA GERA UMA TAG OPTION PARA MOSTRAR NO SELECT DE PESSOAS NO CADASTRO DE CONTATO
-        foreach ($personList as $key => $row) {
+        foreach ($personList as $key => $person) {
             $registers .= View::render('components/personOption', [
-                'id' => $row['id'],
-                'name' => $row['name'],
+                'id' => $person->getId(),
+                'name' => $person->getName(),
                 // SE O ID PASSADO COMO PARAMETRO FOR IGUAL AO ID DO REGISTRO MARCA A PESSOA COMO SELECTED
-                'selected' => $row['id'] == $idPessoaSelected ? 'selected' : '',
+                'selected' => $person->getId() == $idPessoaSelected ? 'selected' : '',
             ]);
         }
 
@@ -72,18 +69,20 @@ class Contact extends Page
         $registers = '';
 
         // BUSCA REGISTROS NA MOCK API
-        $api = new ContactMockApi();
-        $personApi = new PersonMockApi();
-        $results = $api->getRegisters();
+        $repository = new ContactModel();
+        $results = $repository->getRegisters();
 
         // PARA CADA REGISTRO GERA UMA TABLE ROW
-        foreach ($results as $key => $row) {
+        $personRepository = new PersonModel();
+        foreach ($results as $key => $contact) {
+            $person = $personRepository->getPersonById($contact->getPerson_id());
+
             $registers .= View::render('contact/contact', [
-                'id' => $row['id'],
-                'tipo' => $row['tipo'],
-                'descricao' => $row['descricao'],
+                'id' => $contact->getId(),
+                'tipo' => $contact->getTipo(),
+                'descricao' => $contact->getDescricao(),
                 // BUSCA DADOS DA PESSOA BASEADA NO ID REGISTRADO NO CONTATO
-                'pessoa' => $personApi->getPersonById($row['pessoa'])['name'],
+                'pessoa' => $person !== null ? $person->getName() : "Pessoa não encontrada",
             ]);
         }
 
@@ -110,14 +109,17 @@ class Contact extends Page
             return self::updateContactById($id, $newData);
         } else {
 
-            $api = new ContactMockApi();
-            $personData = $api->getContactById($id);
+            $repository = new ContactModel();
+            $personData = $repository->getContactById($id);
+
+            if ($personData == null)
+                return self::contactList();
 
             $contentView = View::render('contact/contactEdit', [
                 'title' => "EDITANDO REGISTRO",
-                'typeContactOptions' => $personData['tipo'] == 'Telefone' ? View::render('components/typeContactTelefoneSelected') : View::render('components/typeContactEmailSelected'),
-                'descricao' => $personData['descricao'],
-                'personOptions' => $this->getSelectOptions($personData['pessoa'])
+                'typeContactOptions' => $personData->getTipo() === 'Telefone' ? View::render('components/typeContactTelefoneSelected') : View::render('components/typeContactEmailSelected'),
+                'descricao' => $personData->getDescricao(),
+                'personOptions' => $this->getSelectOptions($personData->getPerson_id())
             ]);
 
             return parent::getPage("LISTA DE CONTATOS", $contentView);
@@ -126,13 +128,8 @@ class Contact extends Page
 
     public function updateContactById($id, $newData)
     {
-        $api = new ContactMockApi;
-        $newData = [
-            'tipo' => $newData['tipo'],
-            'pessoa' => $newData['pessoa'],
-            'descricao' => $newData['descricao']
-        ];
-        $api->updateContact($id, $newData);
+        $repository = new ContactModel();
+        $repository->updateContact($id, $newData['tipo'], $newData['descricao'], $newData['pessoa']);
 
         // RETORNA LISTA DE CONTATOS BUSCADOS DA MOCK API
         return self::contactList();
@@ -140,8 +137,8 @@ class Contact extends Page
 
     public function deleteContactById(string $id)
     {
-        $api = new ContactMockApi;
-        $api->removeContact($id);
+        $repository = new ContactModel();
+        $repository->removeContact($id);
 
         // RETORNA LISTA DE CONTATOS BUSCADOS DA MOCK API
         return self::contactList();
