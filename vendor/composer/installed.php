@@ -3,7 +3,7 @@
         'name' => 'friendly/routes',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '7ac5c63d9bf57cd4885f68515480643a13d16af0',
+        'reference' => '77933db135fe545a22bcaaa3a410ae565988bce5',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -121,7 +121,7 @@
         'friendly/routes' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '7ac5c63d9bf57cd4885f68515480643a13d16af0',
+            'reference' => '77933db135fe545a22bcaaa3a410ae565988bce5',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

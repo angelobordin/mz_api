@@ -1,4 +1,9 @@
 <?php
+// if (extension_loaded('pdo_mysql')) {
+//   echo 'O driver PDO MySQL está habilitado.';
+// } else {
+//   echo 'O driver PDO MySQL não está habilitado.';
+// }
 
 require __DIR__ . '/../vendor/autoload.php';
 
