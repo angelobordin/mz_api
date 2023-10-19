@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 
 /**
@@ -31,26 +33,25 @@ class Contact
     private string $descricao;
 
     /**
-     * @ManyToOne(targetEntity="Person")
-     * @JoinColumn(name="person_id", referencedColumnName="id")
+     * @column(type="integer")
      */
-    private Person $person_id;
+    private int $person_id;
 
     /**
      * 
-     * @return Person
+     * @return int
      */
-    public function getPerson_id(): App\Entity\Person
+    public function getPerson_id()
     {
         return $this->person_id;
     }
 
     /**
      * 
-     * @param Person $person_id 
+     * @param int $person_id 
      * @return self
      */
-    public function setPerson_id(App\Entity\Person $person_id): self
+    public function setPerson_id($person_id): self
     {
         $this->person_id = $person_id;
         return $this;
