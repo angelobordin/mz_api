@@ -18,31 +18,43 @@ Projeto de uma api em PHP com registros de pessoas e contatos.<br>
 - `Cadastro de contatos`:
   - 'Mètodo': POST
   - 'Endpoint': /contact/register.
+- `Edição/Atualização de pessoas`:
+  - 'Mètodo': POST
+  - 'Endpoint': /edit/person/:id.
+- `Edição/Atualização de contatos`:
+  - 'Mètodo': POST
+  - 'Endpoint': /edit/contact/:id.
+- `Exclusão de pessoas`:
+  - 'Mètodo': DELETE
+  - 'Endpoint': /delete/person/:id.
+- `Exclusão de contatos`:
+  - 'Mètodo': DELETE
+  - 'Endpoint': /delete/contact/:id.
 
-<h3>Em construção :construction:</h3>
-
-- `Exclusão de pessoas`: Os usuários poderão excluir os registros de pessoas.
-- `Atualização de pessoas`: Os usuários poderão excluir os registros de pessoas.
-- `Exclusão de contatos`: Os usuários poderão atualizar os contatos de uma pessoa.
-- `Atualização de contatos`: Os usuários poderão atualizar os contatos de uma pessoa.
-- `Integração com Doctrine2`: Integração do Backend com o ORM Doctrine.
-- `Integração com MYSQL`: Integração e configuração de uma conexão do Backend com o banco de dados MYSQL.
 
 <h2>Rodando o projeto 🛠️</h2>
 <h3>Pré-Requisitos</h3>
 
 ⚠️ [PHP](https://www.php.net/downloads.php)<br>
 ⚠️ [Composer](https://getcomposer.org/)<br>
+⚠️ [MySQL](https://dev.mysql.com/downloads/installer/)<br>
 
-Após baixar o projeto no seu dispositivo, você pode abri-lo no VS Code.<br>
+<h3>VS Code</h3>
+
+- Instale o MySQL no seu ambiente;
+- Após a instalação ser concluída você deve criar um banco de dados;
+  - Poser ser através no MySQL WorkBecnh (Windoes) ou logando no mysql através do terminal e executar o comando "CREATE DATABASE sua_database_aqui" (Linux);
+
+Após pode abri-lo no VS Code.<br>
 Para isso abra o VS Code em seu dispositivo, após clique em:
 
 <h3>VS Code</h3>
 
 - **File >> Open Folder...** ou digite **Ctrl+K** / **Ctrl+O**;
 - Abra o terminal em **Terminal >> New Terminal**;
-- Digite **composer install** para realizar a instalação das dependências do projeto;
-- Após digite **php -S localhost:8000 -t public** para iniciar o servidor local na porta **8000**;
+- Digite **composer install** para realizar a instalação das dependências do projeto;;
+- Em seguida execute o comando **Vendor/bin/doctrine orm:schema-tool:update --force** no terminal para gerar as tabelas das entidades do projeto;
+- Após exceute o comando **php -S localhost:8000 -t public** no seu terminal para iniciar o servidor local na porta **8000**;
 
 <h2>Tecnologias Utilizadas</h2>
 
