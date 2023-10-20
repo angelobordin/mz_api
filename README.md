@@ -43,7 +43,7 @@ Projeto de uma api em PHP com registros de pessoas e contatos.<br>
 
 - Instale o MySQL no seu ambiente;
 - Após a instalação ser concluída você deve criar um banco de dados;
-  - Poser ser através do MySQL WorkBecnh (Windows) ou logando no mysql através do terminal e executar o comando "CREATE DATABASE sua_database_aqui" (Linux);
+  - Pode ser através do MySQL WorkBench (Windows), ou logando no mysql através do terminal e executar o comando "CREATE DATABASE sua_database_aqui" (Linux);
 
 Após pode abri-lo no VS Code.<br>
 Para isso abra o VS Code em seu dispositivo, após clique em:
@@ -55,6 +55,18 @@ Para isso abra o VS Code em seu dispositivo, após clique em:
 - Digite **composer install** para realizar a instalação das dependências do projeto;;
 - Em seguida execute o comando **Vendor/bin/doctrine orm:schema-tool:update --force** no terminal para gerar as tabelas das entidades do projeto;
 - Após exceute o comando **php -S localhost:8000 -t public** no seu terminal para iniciar o servidor local na porta **8000**;
+
+<h3>Possíveis erros</h3>
+
+- PDO_mysql:
+  - Caso quando executar o o comando para gerar tabelas o terminal informe que esteja faltando o driver, você deve seguir os seguintes passos:
+    - Você deve acessar o caminho **/etc/php/{versão do seu php}/cli** e abrir o arquivo **php.ini** como algum editor de código, como exemplo o nano:
+    - Após localize a seguinte linha de código: **extension=pdo_mysql** e verifique se não há **;** no começo da linha, caso houver você deve retirar para descomentar a linha.
+    - Em seguida teste a aplicação novamente. Caso continue reportando erro da falta do driver deve seguir os passos abaixo:
+      - Descomentar o código no ínicio do arquivo **index.php** e executar o projeto.
+      - Uma mensagem irá aparecer no canto superior da tela do navegord mostrando se você possui o driver instalado no seu computador.
+      - Para habilitar/instalar o driver deve executar o comando **sudo apt install php_mysql** para instalar o driver necessário.
+      - Logo em seguida é só testar sua aplicação novamente
 
 <h2>Tecnologias Utilizadas</h2>
 
