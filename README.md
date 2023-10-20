@@ -43,7 +43,7 @@ Projeto de uma api em PHP com registros de pessoas e contatos.<br>
 
 - Instale o MySQL no seu ambiente;
 - Após a instalação ser concluída você deve criar um banco de dados;
-  - Poser ser através no MySQL WorkBecnh (Windoes) ou logando no mysql através do terminal e executar o comando "CREATE DATABASE sua_database_aqui" (Linux);
+  - Poser ser através do MySQL WorkBecnh (Windows) ou logando no mysql através do terminal e executar o comando "CREATE DATABASE sua_database_aqui" (Linux);
 
 Após pode abri-lo no VS Code.<br>
 Para isso abra o VS Code em seu dispositivo, após clique em:
